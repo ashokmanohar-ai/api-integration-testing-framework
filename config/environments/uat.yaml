@@ -1,0 +1,4 @@
+wiremock_url: http://localhost:8080
+broker_url: localhost:19092
+request_timeout: 10.0
+log_level: INFO

@@ -1,0 +1,16 @@
+{
+  "priority": 1,
+  "scenarioName": "Transient payment recovery",
+  "requiredScenarioState": "Recovered",
+  "request": {
+    "method": "POST",
+    "urlPath": "/payments/authorise",
+    "headers": {"X-Payment-Scenario": {"equalTo": "transient"}}
+  },
+  "response": {
+    "status": 200,
+    "jsonBody": {"status": "APPROVED", "provider_reference": "wm-recovered"},
+    "headers": {"Content-Type": "application/json"}
+  }
+}
+

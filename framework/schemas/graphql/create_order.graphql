@@ -1,0 +1,11 @@
+mutation CreateOrder($customerId: ID!, $items: [OrderItemInput!]!) {
+  createOrder(customerId: $customerId, items: $items) {
+    id
+    customerId
+    status
+    total
+    correlationId
+    items { productId quantity unitPrice }
+  }
+}
+

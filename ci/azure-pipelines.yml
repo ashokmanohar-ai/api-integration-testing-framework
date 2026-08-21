@@ -1,0 +1,41 @@
+trigger:
+  - main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  POSTGRES_PASSWORD: $(acmePostgresTestPassword)
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: "3.12"
+  - script: python -m pip install -e ".[dev,messaging,postgres]"
+    displayName: Install dependencies
+  - script: |
+      ruff check .
+      ruff format --check .
+      mypy .
+    displayName: Static quality
+  - script: |
+      docker compose up -d --build
+      python scripts/wait_for_services.py
+    displayName: Start integration environment
+  - script: pytest -m "not docker" -n auto --junitxml=reports/junit.xml --html=reports/report.html --self-contained-html
+    displayName: Execute tests
+  - script: quality-gate --junit reports/junit.xml
+    displayName: Release gate
+  - task: PublishTestResults@2
+    condition: always()
+    inputs:
+      testResultsFormat: JUnit
+      testResultsFiles: reports/junit.xml
+  - task: PublishPipelineArtifact@1
+    condition: always()
+    inputs:
+      targetPath: reports
+      artifact: api-integration-evidence
+  - script: docker compose down -v
+    condition: always()
+    displayName: Stop environment

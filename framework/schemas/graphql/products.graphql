@@ -1,0 +1,10 @@
+query Products($limit: Int!) {
+  products(limit: $limit) {
+    id
+    sku
+    name
+    price
+    inventory
+  }
+}
+

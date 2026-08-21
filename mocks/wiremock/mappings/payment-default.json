@@ -1,0 +1,6 @@
+{
+  "priority": 10,
+  "request": {"method": "POST", "urlPath": "/payments/authorise"},
+  "response": {"status": 422, "jsonBody": {"code": "UNKNOWN_SCENARIO"}}
+}
+
