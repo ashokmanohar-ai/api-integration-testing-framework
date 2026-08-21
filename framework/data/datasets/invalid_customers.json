@@ -1,0 +1,6 @@
+[
+  {"case": "missing first name", "payload": {"last_name": "Tester", "email": "a@example.com"}, "field": "first_name"},
+  {"case": "blank first name", "payload": {"first_name": "", "last_name": "Tester", "email": "a@example.com"}, "field": "first_name"},
+  {"case": "invalid email", "payload": {"first_name": "A", "last_name": "Tester", "email": "not-an-email"}, "field": "email"},
+  {"case": "long last name", "payload": {"first_name": "A", "last_name": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "email": "a@example.com"}, "field": "last_name"}
+]

@@ -1,0 +1,8 @@
+api_base_url: http://localhost:8000
+graphql_url: http://localhost:8000/graphql
+database_url: sqlite:///./acme-commerce.db
+wiremock_url: http://localhost:8080
+broker_url: localhost:19092
+request_timeout: 5.0
+log_level: INFO
+

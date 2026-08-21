@@ -1,0 +1,14 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "urlPath": "/payments/authorise",
+    "headers": {"X-Payment-Scenario": {"equalTo": "timeout"}}
+  },
+  "response": {
+    "status": 200,
+    "fixedDelayMilliseconds": 2000,
+    "jsonBody": {"status": "APPROVED", "provider_reference": "too-late"}
+  }
+}
+

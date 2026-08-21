@@ -1,0 +1,10 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "urlPath": "/payments/authorise",
+    "headers": {"X-Payment-Scenario": {"equalTo": "unavailable"}}
+  },
+  "response": {"status": 503, "jsonBody": {"code": "PAYMENT_UNAVAILABLE"}}
+}
+

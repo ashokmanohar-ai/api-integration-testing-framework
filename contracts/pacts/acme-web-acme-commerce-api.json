@@ -1,0 +1,30 @@
+{
+  "consumer": {"name": "AcmeWeb"},
+  "provider": {"name": "AcmeCommerceApi"},
+  "interactions": [
+    {
+      "description": "API health is available",
+      "request": {"method": "GET", "path": "/health"},
+      "response": {
+        "status": 200,
+        "headers": {"Content-Type": "application/json"},
+        "body": {"status": "UP", "service": "acme-commerce-api", "version": "1.0.0"}
+      }
+    },
+    {
+      "description": "products are empty for a new provider",
+      "request": {
+        "method": "GET",
+        "path": "/products",
+        "headers": {"Authorization": "Bearer admin-token"}
+      },
+      "response": {
+        "status": 200,
+        "headers": {"Content-Type": "application/json"},
+        "body": {"items": [], "page": 1, "page_size": 20, "total": 0, "sort": "created_at", "direction": "asc"}
+      }
+    }
+  ],
+  "metadata": {"pactSpecification": {"version": "3.0.0"}}
+}
+

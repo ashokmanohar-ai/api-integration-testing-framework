@@ -1,0 +1,73 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "api-integration-testing-framework"
+version = "1.0.0"
+description = "Enterprise API and distributed-systems quality engineering reference implementation"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+authors = [{ name = "Ashok Kumar Manohar" }]
+dependencies = [
+  "email-validator>=2.2,<3",
+  "fastapi>=0.115,<1",
+  "graphql-core>=3.2,<4",
+  "httpx>=0.28,<1",
+  "pydantic>=2.10,<3",
+  "pydantic-settings>=2.7,<3",
+  "PyYAML>=6.0,<7",
+  "SQLAlchemy>=2.0,<3",
+  "structlog>=25.1,<26",
+  "uvicorn[standard]>=0.34,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.14,<2",
+  "pact-python>=3.1,<4",
+  "pytest>=8.3,<9",
+  "pytest-asyncio>=0.25,<1",
+  "pytest-cov>=6.0,<7",
+  "pytest-html>=4.1,<5",
+  "pytest-xdist>=3.6,<4",
+  "ruff>=0.9,<1",
+  "types-PyYAML>=6.0,<7",
+]
+messaging = ["kafka-python-ng>=2.2,<3"]
+postgres = ["psycopg[binary]>=3.2,<4"]
+reporting = ["allure-pytest>=2.13,<3"]
+all = [
+  "api-integration-testing-framework[dev,messaging,postgres,reporting]",
+]
+
+[project.scripts]
+acme-api = "demo_system.main:run"
+quality-gate = "framework.quality.quality_gate:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["config", "framework", "demo_system"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+exclude = ["contracts/pacts", ".venv", "pip-build-env-*", "pip-ephem-wheel-cache-*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF", "ASYNC"]
+ignore = ["B008"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["pydantic.mypy"]
+exclude = ["tests", ".venv", "pip-build-env-*", "pip-ephem-wheel-cache-*"]
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = ["kafka.*"]
+ignore_missing_imports = true

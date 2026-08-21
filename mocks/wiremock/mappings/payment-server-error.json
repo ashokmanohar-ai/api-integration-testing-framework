@@ -1,0 +1,10 @@
+{
+  "priority": 1,
+  "request": {
+    "method": "POST",
+    "urlPath": "/payments/authorise",
+    "headers": {"X-Payment-Scenario": {"equalTo": "server-error"}}
+  },
+  "response": {"status": 500, "jsonBody": {"code": "PAYMENT_PROVIDER_ERROR"}}
+}
+
