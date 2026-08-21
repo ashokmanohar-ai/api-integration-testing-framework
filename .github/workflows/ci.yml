@@ -30,6 +30,11 @@ jobs:
           ruff format --check .
       - name: Type check
         run: mypy .
+      - name: Generate ephemeral database credential
+        run: |
+          password="$(openssl rand -hex 24)"
+          echo "::add-mask::$password"
+          echo "POSTGRES_PASSWORD=$password" >> "$GITHUB_ENV"
       - name: Build and start integration environment
         run: docker compose up -d --build
       - name: Wait for healthy services
