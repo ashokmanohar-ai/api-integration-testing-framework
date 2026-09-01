@@ -14,6 +14,32 @@ The repository is deliberately interview-friendly: a reviewer can start with the
 workflows, see the client and model boundaries, then trace one correlation ID across API, database,
 payment and event evidence.
 
+## Recruiter quick tour
+
+<p align="center">
+  <img src="docs/assets/recruiter-walkthrough.gif" width="100%" alt="66-second recruiter walkthrough of the api integration testing framework" />
+</p>
+
+> **60-second decision:** this repository proves distributed-system Test Architecture beyond endpoint checks, covering contracts, persistence, asynchronous events, authorization, failure injection and duplicate-side-effect prevention.
+
+| Recruiter question | Verifiable answer |
+| --- | --- |
+| **Problem** | An HTTP 200 can still hide incorrect persistence, a lost event, duplicate payment or cross-tenant access. |
+| **Architecture** | Typed REST/GraphQL clients drive a FastAPI provider; Pact verifies consumer contracts; SQLAlchemy checks state; WireMock controls dependency faults; a transactional outbox publishes typed events to Redpanda. |
+| **Evidence** | Positive/negative/boundary and RBAC tests, real Pact provider verification, database/event correlation, timeout/retry/idempotency scenarios, Docker Compose, JUnit/HTML reporting and CI quality gates. |
+| **Role signal** | Test Architect, API Test Architect, Integration Test Architect and Principal SDET. |
+
+**Five-minute proof**
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e ".[dev,messaging,postgres]"
+pytest -m smoke
+```
+
+Expected proof: portable, isolated API and validation evidence without an external service account. All datasets, applications and walkthrough claims are synthetic/reference evidence unless explicitly stated otherwise.
+
 ## The business problem
 
 A green endpoint check does not prove that a distributed order workflow is correct. A request may
