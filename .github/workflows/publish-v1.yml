@@ -1,0 +1,41 @@
+name: Publish v1.0.0
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-v1.yml"
+      - "CHANGELOG.md"
+      - "docs/releases/v1.0.0.md"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-v1
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.repository_owner == 'ashokmanohar-ai'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout release commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Publish stable v1.0.0 release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v1.0.0 >/dev/null 2>&1; then
+            echo "v1.0.0 already exists; nothing to publish."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a v1.0.0 -m "v1.0.0 stable portfolio release"
+          git push origin v1.0.0
+          gh release create v1.0.0 --verify-tag --title "v1.0.0 — API & Integration Quality Engineering Reference" --notes-file docs/releases/v1.0.0.md
