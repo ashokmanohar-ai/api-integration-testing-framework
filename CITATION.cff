@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use or reference this work, please cite it using the metadata below."
+title: "AI-Assisted API Quality Engineering: Generating, Executing and Evaluating API Tests with AI Agents"
+type: article
+authors:
+  - family-names: Manohar
+    given-names: Ashok Kumar
+version: 1.0.0
+date-released: 2026-09-05
+url: "https://github.com/ashokmanohar-ai/api-integration-testing-framework/blob/main/WHITEPAPER.md"
+repository-code: "https://github.com/ashokmanohar-ai/api-integration-testing-framework"
+license: MIT
+keywords:
+  - API Quality Engineering
+  - AI-Assisted Testing
+  - Agentic AI
+  - AI Agents
+  - API Testing
+  - Integration Testing
+  - REST
+  - GraphQL
+  - Contract Testing
+  - Pact
+  - RBAC
+  - Authorization Testing
+  - Idempotency
+  - Event Testing
+  - CI/CD
+  - Quality Gates
+  - Test Generation
+  - Failure Triage
+abstract: >-
+  An evidence-driven Quality Engineering framework for using AI agents to assist
+  API test analysis, generation, workflow composition, execution planning,
+  regression selection and failure triage while keeping API contracts,
+  authorization policy, business rules and real execution evidence
+  authoritative. The work covers REST, GraphQL, authentication, RBAC,
+  ownership, contract testing, persistence, asynchronous events, dependency
+  failures, retries, idempotency, structured agent outputs, test traceability,
+  coverage, CI/CD quality gates and production-to-regression learning.
